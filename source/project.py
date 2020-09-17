@@ -31,15 +31,20 @@ class Project:
 	flagScaneado = False
 	s1 = False
 
+
+
 	def __init__(self, name):
-		self.name 			= name
-		self.colCenter   	= []
-		self.colLeft   		= []
-		self.colRight   	= []
-		self.files 			= []
+		self.name 				= name
+		self.colCenter   		= []
+		self.colLeft   			= []
+		self.colRight   		= []
+		self.files 				= []
+		self.posNamePosFile 	= ''
+		self.negNamePosFile 	= ''
+		self.mainNamePosFile 	= ''
 
 	def getNamePosFile(self):
-		aux = self.name+'_irc-f.log'
+		aux = self.posNamePosFile
 		if self.status2Files:
 			if aux in self.files:
 				return aux
@@ -49,7 +54,7 @@ class Project:
 			return "False"
 
 	def getNameNegFile(self):
-		aux = self.name+'_irc-r.log'
+		aux = self.negNamePosFile
 		if self.status2Files:
 			if aux in self.files:
 				return aux
@@ -59,7 +64,7 @@ class Project:
 			return "False"
 
 	def getNameMainFile(self):
-		aux = self.name+'_irc.log'
+		aux = self.mainNamePosFile
 		if self.statusCenter:
 			if aux in self.files:
 				return aux
@@ -102,19 +107,27 @@ class Project:
 		countNIrcf = 0
 		countNIrcr = 0
 		count      = 0
-
+		
 		for i in range (len(self.files)):
-			if   self.files[i].find('_irc-f.log') != -1:
+			if   self.files[i].find('_irc-f.log') != -1 or self.files[i].find('-irc-f.log') != -1 or self.files[i].find('_IRC-F.log') != -1 or self.files[i].find('-IRC-F.log') != -1:
+				self.posNamePosFile = self.files[i] 
 				countNIrcf += 1
-			elif self.files[i].find('_irc-r.log') != -1:
+			elif self.files[i].find('_irc-r.log') != -1 or self.files[i].find('-irc-r.log') != -1 or self.files[i].find('_IRC-R.log') != -1 or self.files[i].find('-IRC-R.log') != -1:
+				self.negNamePosFile = self.files[i]
 				countNIrcr += 1
-			elif self.files[i].find('_irc.log') != -1:
+
+			elif self.files[i].find('_irc.log') != -1   or self.files[i].find('-irc.log') != -1   or self.files[i].find('_IRC.log') != -1   or self.files[i].find('-IRC.log') != -1 :
+				self.mainNamePosFile = self.files[i]
 				count 	   += 1
 
 		#print('file:',self.files)
 		#print('countNIrcf:',countNIrcf)
 		#print('countNIrcr:',countNIrcr)
 		#print('countN    :',count)
+		#print('IRC-R:',self.negNamePosFile)
+		#print('IRC-F:',self.posNamePosFile)
+		#print('IRC:',self.mainNamePosFile)
+		
 
 		if (len(self.files) == 2):
 			if ( (countNIrcf == 1 ) and (countNIrcr == 1 )  ):
@@ -228,6 +241,7 @@ class Project:
 
 	def stageS1(self):
 		if self.statusCenter:
+			print('main',self.getNameMainFile())
 			self.colCenter = self.finder(self.getNameMainFile())
 			self.s1 = True
 		elif self.status2Files:

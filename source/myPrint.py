@@ -35,15 +35,14 @@ def csvData(fileName, columna ,headerOption, deleteZero):
 			for obj in columna:
 				header.append(obj.colName)
 			header.insert(0, 'id')
-			auxHeader = ' \t '.join(header)
+			auxHeader = ';'.join(header)
 			f.write(auxHeader+'\n')
 		for i in range (0,len(columna[0].lista)):
 			for obj in columna:
 				#print('***',obj.colName)
-				#print('¢¢',obj.lista[i].dato['value'])
 				data.append(obj.lista[i].dato['value'])
 			data.insert(0, str(columna[0].lista[i].dato['key']))
-			aux = ' \t '.join(data)
+			aux = ';'.join(data)
 
 			if deleteZero:
 				if i != len(columna[0].lista)-1:

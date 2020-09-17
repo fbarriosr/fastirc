@@ -57,11 +57,24 @@ listProjectIncomplete = []          # List Incomple Project
 
 for i in range (len(allFilesNames)):
 	name = allFilesNames[i]
-	if name.find('_irc.log') != -1 or name.find('_irc-f.log') != -1 or name.find('_irc-r.log') != -1:
+	c1 = name.find('_irc.log') != -1 or name.find('_irc-f.log') != -1 or name.find('_irc-r.log') != -1
+	c2 = name.find('-irc.log') != -1 or name.find('-irc-f.log') != -1 or name.find('-irc-r.log') != -1
+	c3 = name.find('_IRC.log') != -1 or name.find('_IRC-F.log') != -1 or name.find('_IRC-R.log') != -1
+	c4 = name.find('-IRC.log') != -1 or name.find('-IRC-F.log') != -1 or name.find('-IRC-R.log') != -1
+	if   c1 or  c2 or c3 or c4:
 		aux = allFilesNames[i].replace('.log','')
 		aux = aux.replace('_irc-f','')
 		aux = aux.replace('_irc-r','')
 		aux = aux.replace('_irc','')
+		aux = aux.replace('-irc-f','')
+		aux = aux.replace('-irc-r','')
+		aux = aux.replace('-irc','')
+		aux = aux.replace('_IRC-F','')
+		aux = aux.replace('_IRC-R','')
+		aux = aux.replace('_IRC','')
+		aux = aux.replace('-IRC-F','')
+		aux = aux.replace('-IRC-R','')
+		aux = aux.replace('-IRC','')
 		#print('aux',aux)
 		if not(aux in allProjectName):
 			allProjectName.append(aux)
@@ -175,7 +188,7 @@ else:
 	
 
 nameCurrentProject = listProject[nproject].getName()
-fileOutputCsv = nameCurrentProject +'All_.csv'
+fileOutputCsv = nameCurrentProject +'_irc_cartesian_coord.csv'
 
 #listProjectMethod[nproject].view()
 
@@ -287,7 +300,7 @@ while True:
 					else:
 						print('Error only digits')
 			
-			fileOutputCsv = nameCurrentProject +'_col_'+answer.replace(',','_')+'.csv'
+			fileOutputCsv = nameCurrentProject +'_irc_cartesian_coord.csv'
 			csv(fileOutputCsv , listProject[nproject],  answer)
 			if vision:
 				screen.clear()
@@ -301,7 +314,7 @@ while True:
 				printElement('*',40)
 
 		else:
-			fileOutputCsv = nameCurrentProject+'_col_0_1' +'.csv'
+			fileOutputCsv = nameCurrentProject+'_irc.csv'
 			csv(fileOutputCsv , listProject[nproject],  "Basic")
 			if vision:
 				screen.clear()
@@ -321,7 +334,7 @@ while True:
 			break
 		break
 	elif answer == 'n':
-		fileOutputCsv = nameCurrentProject+'_col_0_1' +'.csv'
+		fileOutputCsv = nameCurrentProject+'_irc.csv'
 		csv(fileOutputCsv , listProject[nproject],  "Basic")
 		if vision:
 			screen.clear()
