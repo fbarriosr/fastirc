@@ -1,6 +1,7 @@
 ## FASTIRC
 
-Es un proyecto "UNIX" que permite extraer valores de energía versus coordenada de reacción desde uno dos archivo(s) de salida generado(s) por el programa Gaussian 16 y a pedido opcional del usuario, extraer datos de posición en coordenadas cartesianas de átomos que provienen de dicho cálculo
+Rescata y tabula desde un cálculo de coordenada de reacción intrínseca (IRC) proveniente del programa Gaussian valores de coordenadas de reacción intrínseca, energía relativa al estado de transición y coordenadas cartesianas de todos los átomos. Requiere de archivos de salida de cálculos IRC, de perfil completo o separados en ramas de avance y retroceso (forward y reverse). Se puede en emplear en computadores personales con Mac o Windows (jfindex).
+
 ## Requerimientos
 
 Requiere python 3.
